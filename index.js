@@ -24,7 +24,7 @@ app.use("/" , surveyRouter)
   
 app.use("/" , quesRouter)
 app.get('/' , (req , res)=>{
-    res.send("hello")
+    res.send("Test for Survey Backend")
 })
 
 app.listen(process.env.PORT , ()=>{

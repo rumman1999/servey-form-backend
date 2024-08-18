@@ -5,7 +5,6 @@ const userModel = require('../model/user.model')
 
 
 userRouter.post('/register', async (req, res) => {
-    console.log(req.body)
     const { name, email, phoneNumber, profession, password } = req.body;
 
     if (!name || !email || !phoneNumber || !profession || !password) {
