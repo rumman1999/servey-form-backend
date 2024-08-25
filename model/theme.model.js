@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const themeSchema = new mongoose.Schema({
     email: String,
-    surveyName: String,
+    surveyId: String,
     themeOpt: String,
     themeName: String,
     themeType: String,

@@ -20,7 +20,7 @@ themeRouter.get('/themes', async (req, res) => {
     try {
       const {
         email,
-        surveyName,
+        surveyId,
         themeOpt,
         themeName,
         themeType,
@@ -32,7 +32,7 @@ themeRouter.get('/themes', async (req, res) => {
         color
       } = req.body;
   
-      const existingTheme = await Theme.findOne({ email, surveyName });
+      const existingTheme = await Theme.findOne({ email, surveyId });
   
       if (existingTheme) {
         existingTheme.themeOpt = themeOpt;
@@ -50,7 +50,7 @@ themeRouter.get('/themes', async (req, res) => {
       } else {
         const newTheme = new Theme({
           email,
-          surveyName,
+          surveyId,
           themeOpt,
           themeName,
           themeType,
@@ -73,14 +73,27 @@ themeRouter.get('/themes', async (req, res) => {
   themeRouter.post('/theme', async (req, res) => {
     // console.log("hello");
     try {
-      const { email , surveyName} = req.body;
+      const { email , surveyId} = req.body;
   
-      const existingTheme = await Theme.findOne({ email, surveyName });
+      const existingTheme = await Theme.findOne({ email, surveyId });
       console.log(existingTheme);
       if (existingTheme) {
         res.status(200).json(existingTheme);
       } else {
-        res.status(404).send("not  found");
+        const theme = {
+        email: email,
+        surveyName: "default",
+        themeOpt: "normal",
+        themeName: "default",
+        themeType: "normal",
+        fromType: "default",
+        allQuestionMandatory: "default",
+        enableSkip: "default",
+        optionType: "box",
+        font: "roboto",
+        color: "blue"
+    }
+        res.status(202).json(theme);
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
