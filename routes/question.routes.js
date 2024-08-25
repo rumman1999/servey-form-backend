@@ -6,7 +6,7 @@ quesRouter.post('/ques', async (req, res) => {
   try {
     const { email, surveyId, questionText, option } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const newQues = new quesModel({
       email,
@@ -17,7 +17,7 @@ quesRouter.post('/ques', async (req, res) => {
 
     const result = await newQues.save();
 
-    console.log(result);
+    // console.log(result);
     res.status(200).json({
       status: 'Success',
       message: 'MCQ question created successfully',
@@ -46,7 +46,6 @@ quesRouter.get('/ques/:surveyId', async (req, res) => {
   const surveyId = req.params.surveyId;
   try {
     const ques = await quesModel.find({ surveyId: surveyId });
-console.log(ques);
     res.status(200).json({
       status: "Success",
       result: ques

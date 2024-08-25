@@ -29,7 +29,7 @@ surveyRouter.post("/survey", Upload.single("image"), async (req, res) => {
   try {
     let newSurvey = await new surveyModel({
       ...req.body,
-      image: `image/${req.file.filename}`,
+      image: `${req.file.filename}`,
     });
     // console.log(newSurvey);
     let result = await newSurvey.save();
@@ -161,5 +161,21 @@ surveyRouter.put("/survey/:id", Upload.single("image"), async (req, res) => {
     });
   }
 });
+
+surveyRouter.post("/upload-image", Upload.single("image"), (req, res) => {
+  try {
+    res.status(200).json({
+      status: "Success",
+      message: "Image uploaded successfully",
+      filename: req.file.filename,  // Return the filename so it can be used to retrieve the image later
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Failed",
+      message: err.message,
+    });
+  }
+});
+
 
 module.exports = surveyRouter;
